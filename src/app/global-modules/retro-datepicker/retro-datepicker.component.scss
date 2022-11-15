@@ -1,0 +1,35 @@
+.notepads-area{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  header{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+    margin: 20px auto;
+    width: 100%;
+
+    #data{
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 12px;
+      margin: 0;
+    }
+
+    #selector{
+      background-color: #FED8E0;
+      border: none;
+      font-family: 'Press Start 2P';
+      color: #5d5557;
+
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+}

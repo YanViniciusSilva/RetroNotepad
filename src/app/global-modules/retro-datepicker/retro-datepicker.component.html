@@ -1,0 +1,17 @@
+<section class="notepads-area">
+  <header>
+    <a (click)="this.previousDate()">
+    <img
+      src='../../../assets/icons/arrow.png'
+      alt="arrow icon"
+      [ngStyle]="{ width : '16px', height: '16px', transform: 'rotate(180deg)'}"
+    ></a>
+    <h1 id="data" for="selector">{{today}}</h1>
+    <a (click)="this.nextDate()">
+    <img
+      src='../../../assets/icons/arrow.png'
+      alt="arrow icon"
+      [ngStyle]="{ width : '16px', height: '16px'}"
+    ></a>
+  </header>
+</section>

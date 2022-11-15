@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+
+html{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.--green{
+  background-color: #d8fed9;
+}
+
+.--blue{
+  background-color: #d9d8fe;
+}
+
+.--yellow{
+  background-color: #fcffa8;
+}
+
+h1, h2, h3, h4, h6, p, a, span, label{
+  color: #5d5557;
+  font-family: 'Press Start 2P' !important;
+}
+
+.--flex{
+  display: flex;
+}
+
+.--inline-flex{
+  display: inline-flex;
+}
+
+.--flex-centralized{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+

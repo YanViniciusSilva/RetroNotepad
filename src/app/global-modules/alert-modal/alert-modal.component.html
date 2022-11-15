@@ -1,0 +1,16 @@
+<section class="modal">
+  <div
+    class="modal__content --flex-centralized"
+    [ngStyle]="{'background-color': mainColor}"
+  >
+    <div class="modal__content__header">
+      <a id="close" (click)="closeModal()">X</a>
+    </div>
+
+    <div class="modal__content__configs">
+      <p>{{isError ? 'Error: ' : 'Alert!' }}<br/>{{message}}</p>
+    </div>
+
+    <button type="button" (click)="closeModal()"><p>Ok</p></button>
+  </div>
+</section>

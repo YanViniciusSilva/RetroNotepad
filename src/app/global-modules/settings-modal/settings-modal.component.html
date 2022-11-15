@@ -1,0 +1,22 @@
+<section class="modal">
+  <div
+    class="modal__content --flex-centralized"
+    [ngStyle]="{'background-color': mainColor}"
+  >
+    <div class="modal__content__header">
+      <a (click)="closeModal()">X</a>
+    </div>
+
+    <div class="modal__content__configs">
+      <h3>Settings</h3>
+
+      <div class="settings">
+        <label>color:</label>
+        <select [formControl]="selectedColor" (change)="changeAppColor($event)">
+          <option *ngFor="let color of colors" [value]="color.value"><p>{{color.color}}</p></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+

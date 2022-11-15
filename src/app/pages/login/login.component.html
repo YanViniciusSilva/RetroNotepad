@@ -1,0 +1,20 @@
+<section class="--flex-centralized">
+  <div class="login-modal --flex-centralized">
+    <div class="login-modal__header --flex-centralized">
+      <p id="p">login</p>
+    </div>
+
+    <div class="login-modal__data --flex-centralized">
+      <div class="login-modal__data__place --flex">
+        <label class="--text">User:</label>
+        <input class="--text" [formControl]="email" type="email" id="input"/>
+      </div>
+      <div class="login-modal__data__place --flex">
+        <label class="--text">Senha:</label>
+        <input class="--text" [formControl]="password" type="password" id="input"/>
+      </div>
+    </div>
+
+    <button (click)="verifyUser()" class="--flex--centralized" type="submit"><p class="--text">entrar</p></button>
+  </div>
+</section>
