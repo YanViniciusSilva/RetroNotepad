@@ -13,7 +13,7 @@
       <div class="settings">
         <label>color:</label>
         <select [formControl]="selectedColor" (change)="changeAppColor($event)">
-          <option *ngFor="let color of colors" [value]="color.value"><p>{{color.color}}</p></option>
+          <option *ngFor="let theme of themes" [value]="theme.ThemeColor"><p>{{theme.Theme}}</p></option>
         </select>
       </div>
     </div>

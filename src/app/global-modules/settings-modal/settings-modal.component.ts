@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { environment } from 'src/environments/environment';
+import { ModalService } from 'src/app/services/modal.service';
+import { ThemeService } from 'src/app/services/theme.service';
+import { UsersService } from 'src/app/services/users.service';
+
+import { ChangeUserTheme } from './../../request-models/request-theme.model';
 
 @Component({
   selector: 'app-settings-modal',
@@ -10,37 +14,61 @@ import { environment } from 'src/environments/environment';
 })
 export class SettingsModalComponent implements OnInit {
 
-  isOpened:boolean = true
-  mainColor:any = environment.appColor
-  mainColorName:string = ''
-  colors = [
-    {color:'Rosa', value:'#FED8E0'},
-    {color:'Verde', value:'#d8fed9'},
-    {color:'Azul', value:'#d9d8fe'},
-    {color:'Amarelo', value:'#fcffa8'},
-  ]
+  mainColor:any
+  themes:any
 
-  selectedColor = new FormControl(environment.appColor)
+  selectedColor = new FormControl(null)
 
-  constructor( public modalService: NgbModal ) {
-    const color = localStorage.setItem('color', this.selectedColor.value!.toString())
-   }
+  constructor(
+    public _ngbModal: NgbModal,
+    private _modalService : ModalService,
+    private _themeService: ThemeService,
+    private _usersService: UsersService
+  ) {}
 
   ngOnInit(): void {
+    this.getAppThemes()
+    this.getUserAppTheme()
   }
 
-  ngAfterViewInit(){
+  getAppThemes(){
+    this._themeService.getAllThemes().forEach(value => {
+      this.themes = value
+    })
+  }
+
+  getUserAppTheme(){
+    const activeUser:any = localStorage.getItem('Email')
+    this._usersService.getUserByEmail(activeUser).then(result => {
+      this._themeService.getThemeById(result.AppTheme).subscribe(response => {
+        this.selectedColor.setValue(response.ThemeColor)
+        this.mainColor = response.ThemeColor
+      })
+    })
   }
 
   changeAppColor(_event: any){
-    const color:any = this.selectedColor.value
-    localStorage.setItem('color', color)
-    window.location.reload()
-    environment.appColor = color
-    console.log(environment.appColor)
+    const email:any = localStorage.getItem('Email')
+    const changeRequest:ChangeUserTheme = {
+      Email: email,
+      AppTheme: 0
+    }
+    for(let theme of this.themes){
+      if(theme?.ThemeColor == this.selectedColor.value){
+        changeRequest.AppTheme = theme.ThemeId
+        this._themeService.changeUserTheme(changeRequest).subscribe(() => {
+          localStorage.setItem('color', this.selectedColor.value!)
+          window.location.reload()
+        })
+      }
+    }
+  }
+
+  openSettingsModal(){
+    this._modalService.showSettingsModal()
   }
 
   async closeModal(){
-    this.modalService.dismissAll(ModalDismissReasons.BACKDROP_CLICK)
+    this._ngbModal.dismissAll(ModalDismissReasons.BACKDROP_CLICK)
   }
 }

@@ -10,7 +10,7 @@ export class ModalService {
 
   constructor( private _modalService: NgbModal) { }
 
-  showModal(){
+  showSettingsModal(){
     const modalRef = this._modalService.open(SettingsModalComponent)
   }
 

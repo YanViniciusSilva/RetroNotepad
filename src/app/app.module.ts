@@ -16,7 +16,6 @@ import { SettingsModalComponent } from './global-modules/settings-modal/settings
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AlertModalComponent } from './global-modules/alert-modal/alert-modal.component';
-import { LoaderComponent } from './global-modules/loader/loader.component';
 
 
 registerLocaleData(localePT);
@@ -29,7 +28,6 @@ registerLocaleData(localePT);
     SettingsModalComponent,
     LoginComponent,
     AlertModalComponent,
-    LoaderComponent,
   ],
   imports: [
     BrowserModule,

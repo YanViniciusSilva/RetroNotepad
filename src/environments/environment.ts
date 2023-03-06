@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   apiLocalhost: 'http://localhost:3000',
-  appColor: localStorage.getItem('color')?.toString()
 };
 
 /*

@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
   }
 
   setStyles(){
-    let mainColor:any = environment.appColor
+    let mainColor:any = localStorage.getItem('color')
     if(mainColor == null || mainColor == undefined){
       mainColor = '#FED8E0'
     }
@@ -74,8 +74,6 @@ export class LoginComponent implements OnInit {
       })
     }catch(erro:any){
       this._modalService.showAlertModal(erro.error.message, true)
-    }finally{
-      // this._loaderService.hideLoader()
     }
   }
 

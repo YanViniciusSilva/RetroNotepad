@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
+import { ThemeService } from 'src/app/services/theme.service';
 import { UsersService } from 'src/app/services/users.service';
-import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -22,24 +22,22 @@ export class HomePageComponent implements OnInit {
 
   actualPosition:any = [];
   closeResult = ''
-  mainColor = environment.appColor;
+  mainColor:any
 
   constructor(
     private _modalService : ModalService,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _themeService: ThemeService,
   ) {
     if(localStorage.getItem("color") == undefined){
-      const color = localStorage.setItem('color', '#FED8E0')
+      const color = localStorage.setItem('color', this.mainColor)
     }
   }
 
-  ngOnInit(): void {
-    // this.getActiveUser()
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(){
     this.setStyles()
-
   }
 
   async getActiveUser(){
@@ -52,11 +50,16 @@ export class HomePageComponent implements OnInit {
   }
 
   setStyles(){
-    const mainColor:any = environment.appColor
-    document.body.style.backgroundColor = mainColor;
+    const activeUser:any = localStorage.getItem('Email')
+    this._usersService.getUserByEmail(activeUser).then(result => {
+      this._themeService.getThemeById(result.AppTheme).subscribe(response => {
+        this.mainColor = response.ThemeColor
+        document.body.style.backgroundColor = this.mainColor;
+      })
+    })
   }
 
   openSettingsModal(){
-    this._modalService.showModal()
+    this._modalService.showSettingsModal()
   }
 }
